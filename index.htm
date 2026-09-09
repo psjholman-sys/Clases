@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ley 115 de 1994 - Conceptualización de la Educación</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@400;600;800&display=swap');
+
+  :root {
+    --comic-yellow: #FFDE59;
+    --comic-red: #FF5757;
+    --comic-blue: #00C2CB;
+    --comic-dark: #1E1E1E;
+    --comic-card: #FFFFFF;
+    --comic-border: #111111;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #121212;
+    color: var(--comic-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .presentation-container {
+    width: 100%;
+    max-width: 1000px;
+    background: #2b2b2b;
+    border: 4px solid var(--comic-border);
+    border-radius: 12px;
+    box-shadow: 10px 10px 0px #000;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .slide {
+    display: none;
+    padding: 35px;
+    min-height: 580px;
+    background: #f8f9fa;
+    background-image: radial-gradient(#ccc 10%, transparent 11%);
+    background-size: 15px 15px;
+  }
+
+  .slide.active {
+    display: block;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Header & Comic Badges */
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--comic-border);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .comic-title {
+    font-family: 'Bangers', cursive;
+    font-size: 2.2rem;
+    letter-spacing: 1.5px;
+    color: var(--comic-dark);
+    text-shadow: 2px 2px 0px var(--comic-yellow);
+    line-height: 1.1;
+  }
+
+  .badge-pop {
+    background: var(--comic-yellow);
+    border: 2px solid var(--comic-border);
+    padding: 5px 12px;
+    font-family: 'Bangers', cursive;
+    font-size: 1.1rem;
+    box-shadow: 3px 3px 0px #000;
+    transform: rotate(-2deg);
+  }
+
+  /* Comic Grid Layouts */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+
+  .comic-card {
+    background: var(--comic-card);
+    border: 3px solid var(--comic-border);
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 0px var(--comic-border);
+    position: relative;
+  }
+
+  .comic-card-red { background: #FFE8E8; border-color: var(--comic-red); }
+  .comic-card-yellow { background: #FFFDE6; border-color: #D4A000; }
+  .comic-card-blue { background: #E6FAFC; border-color: var(--comic-blue); }
+
+  /* Speech Bubbles */
+  .speech-bubble {
+    position: relative;
+    background: var(--comic-yellow);
+    border: 3px solid var(--comic-border);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0px #000;
+    margin-bottom: 15px;
+  }
+
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 30px;
+    border-width: 15px 15px 0 0;
+    border-style: solid;
+    border-color: var(--comic-yellow) transparent;
+    display: block;
+    width: 0;
+  }
+
+  /* Reflection Slides Special Style */
+  .reflection-slide {
+    background: #FFF2B2 !important;
+    border: 4px dashed var(--comic-border);
+  }
+
+  /* Tables */
+  .comic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: white;
+    border: 3px solid var(--comic-border);
+  }
+
+  .comic-table th, .comic-table td {
+    border: 2px solid var(--comic-border);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .comic-table th {
+    background: var(--comic-yellow);
+    font-family: 'Bangers', cursive;
+    font-size: 1.1rem;
+  }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--comic-dark);
+    padding: 15px 25px;
+    border-top: 3px solid var(--comic-border);
+  }
+
+  .btn-comic {
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    padding: 8px 20px;
+    background: var(--comic-yellow);
+    border: 2px solid var(--comic-border);
+    box-shadow: 3px 3px 0px #FFF;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+
+  .btn-comic:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #FFF;
+  }
+
+  .page-indicator {
+    color: white;
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+  <!-- SLIDE 1: PORTADA -->
+  <div class="slide active">
+    <div style="text-align: center; margin-top: 20px;">
+      <div class="badge-pop" style="display:inline-block; margin-bottom:15px;">Psicología Educativa Aplicada</div>
+      <h1 class="comic-title" style="font-size: 3rem; margin-bottom: 15px;">CONCEPTUALIZACIÓN DE LA EDUCACIÓN<br>FORMAL, NO FORMAL E INFORMAL</h1>
+      <p style="font-size: 1.2rem; font-weight: 600; color: #444;">Según la Ley 115 de 1994 (Ley General de Educación de Colombia)</p>
+      
+      <div class="speech-bubble" style="max-width: 600px; margin: 30px auto; text-align: left;">
+        <strong> Docente Presentador:</strong> Jholman García Padilla<br>
+        <strong> Programa:</strong> Psicología - Universidad de la Costa (CUC)<br>
+        <em>¡Bienvenidos a este recorrido conceptual e interpretativo del marco normativo educativo!</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: OBJETIVO E INDICADORES -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">OBJETIVO E INDICADORES DE DESEMPEÑO</h2>
+      <span class="badge-pop">¡META DE APRENDIZAJE!</span>
+    </div>
+    <div class="grid-2">
+      <div class="comic-card comic-card-yellow">
+        <h3 style="font-family:'Bangers'; font-size:1.5rem;"> OBJETIVO GENERAL</h3>
+        <p style="margin-top:10px;">Facilitar la comprensión rigurosa de las definiciones, diferencias y alcances entre la <strong>educación formal</strong>, <strong>no formal</strong> e <strong>informal</strong> estipuladas en la Ley 115 de 1994.</p>
+      </div>
+      <div class="comic-card comic-card-blue">
+        <h3 style="font-family:'Bangers'; font-size:1.5rem;"> INDICADORES DE DESEMPEÑO</h3>
+        <ul style="margin-top:10px; padding-left:20px; line-height:1.5;">
+          <li>Reconoce que la Constitución colombiana promueve la diversidad étnica y cultural del país y que es deber del Estado protegerla.</li>
+          <li>Comprende la función y articulación del sistema educativo nacional en sus niveles formal, no formal e informal.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: DIAGNÓSTICO Y CONTEXTO SOCIAL -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">CONTEXTO: LA TRAGEDIA DE LA REPITENCIA ESCOLAR</h2>
+      <span class="badge-pop">¡ALERTA SOCIAL!</span>
+    </div>
+    <div class="grid-2">
+      <div class="comic-card comic-card-red">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> Panorama Nacional (Zona Cero - Tito Crissien, 2025)</h3>
+        <p style="font-size:0.95rem; margin-top:8px;">Más de <strong>725.000 estudiantes</strong> en Colombia perdieron el año escolar, una cifra cuadruplicada tras la pandemia que refleja la brecha de aprendizaje y las grietas del sistema educativo formal.</p>
+      </div>
+      <div class="comic-card">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> Mapa de Empatía del Estudiante</h3>
+        <ul style="font-size:0.85rem; margin-top:5px; line-height:1.3;">
+          <li><strong>¿Qué piensa y siente?:</strong> Frustración, temor al fracaso, incertidumbre futura.</li>
+          <li><strong>¿Qué oye?:</strong> Exigencias del sistema, críticas por bajas notas.</li>
+          <li><strong>¿Qué ve?:</strong> Desigualdad, falta de recursos o de acompañamiento.</li>
+          <li><strong>¿Qué dice y hace?:</strong> Se desmotiva o busca alternativas no formales/informales.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: ESTUDIO DE CASO MARÍA -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">ESTUDIO DE CASO: EL CURSO DE MARÍA</h2>
+      <span class="badge-pop">¡ANALIZA EL CASO!</span>
+    </div>
+    <div class="comic-card comic-card-yellow" style="margin-bottom:20px;">
+      <h3 style="font-family:'Bangers'; font-size:1.4rem;"> Situación Practica:</h3>
+      <p style="font-size:1.1rem; margin-top:10px;"><em>"María es una profesional que decide inscribirse en un curso intensivo de Excel de 20 horas en una academia privada para mejorar sus habilidades laborales. Al final recibe un certificado de participación, pero no un título oficial."</em></p>
+    </div>
+    <div class="speech-bubble">
+      <strong>Pregunta para la clase:</strong> De acuerdo con la estructuración, intensidad y certificación recibida, ¿en qué categoría educativa (Formal, No Formal o Informal) se clasifica la formación de María?
+    </div>
+  </div>
+
+  <!-- SLIDE 5: CONCEPTUALIZACIÓN GENERAL -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">CONCEPTUALIZACIÓN DE LOS TRES TIPOS DE EDUCACIÓN</h2>
+      <span class="badge-pop">¡MARCO TEÓRICO!</span>
+    </div>
+    <div class="grid-3">
+      <div class="comic-card comic-card-blue">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> EDUCACIÓN FORMAL</h3>
+        <p style="font-size:0.9rem; margin-top:8px;">Sistema estructurado impartido en escuelas, colegios y universidades. Sigue un currículo progresivo y conduce a títulos oficiales reconocidos por el Estado.</p>
+      </div>
+      <div class="comic-card comic-card-yellow">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> EDUCACIÓN NO FORMAL</h3>
+        <p style="font-size:0.9rem; margin-top:8px;">Actividad organizada y flexible fuera del sistema formal. Orientada a complementar, actualizar o capacitar laboralmente sin currículo rígido ni títulos oficiales.</p>
+      </div>
+      <div class="comic-card">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> EDUCACIÓN INFORMAL</h3>
+        <p style="font-size:0.9rem; margin-top:8px;">Aprendizaje libre, continuo y espontáneo en la vida cotidiana a través de vivencias, interacción social, medios de comunicación y costumbres.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: LEY 115 - EDUCACIÓN FORMAL -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">LEY 115 DE 1994: EDUCACIÓN FORMAL</h2>
+      <span class="badge-pop">ARTÍCULOS 10 Y 11</span>
+    </div>
+    <div class="grid-2">
+      <div class="comic-card">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> ARTÍCULO 10: DEFINICIÓN</h3>
+        <p style="font-size:0.95rem; margin-top:8px;">Se entiende por educación formal aquella que se imparte en <strong>establecimientos educativos aprobados</strong>, en una <strong>secuencia regular de ciclos lectivos</strong>, con sujeción a <strong>pautas curriculares progresivas</strong>, y conducente a <strong>grados y títulos</strong>.</p>
+      </div>
+      <div class="comic-card comic-card-yellow">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> ARTÍCULO 11: NIVELES</h3>
+        <p style="font-size:0.95rem; margin-top:8px;">La educación formal en Colombia se organiza en tres (3) niveles fundamentales:</p>
+        <ol style="margin-top:8px; padding-left:20px; font-weight:600;">
+          <li>Preescolar</li>
+          <li>Educación Básica (Primaria y Secundaria)</li>
+          <li>Educación Media</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: OBJETIVO DE LA EDUCACIÓN FORMAL -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">OBJETIVO Y PROPÓSITO INTEGRAL FORMAL</h2>
+      <span class="badge-pop">¡DESARROLLO HUMANO!</span>
+    </div>
+    <div class="comic-card comic-card-blue" style="margin-bottom:15px;">
+      <h3 style="font-family:'Bangers'; font-size:1.4rem;"> Desarrollo Permanente del Educando:</h3>
+      <p style="font-size:1.05rem; margin-top:8px;">La educación formal en sus distintos niveles tiene por objeto desarrollar en el estudiante <strong>conocimientos, habilidades, aptitudes y valores</strong> mediante los cuales las personas puedan fundamentar su desarrollo de forma continua.</p>
+    </div>
+    <div class="comic-card">
+      <h3 style="font-family:'Bangers'; font-size:1.3rem;"> Dimensión Social y Cultural:</h3>
+      <p style="font-size:0.95rem; margin-top:5px;">Proporciona una formación integral que abarca aspectos académicos, éticos, ciudadanos y culturales, rigiéndose por los principios y fines generales de la Ley General de Educación.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: PREGUNTA DE REFLEXIÓN 1 -->
+  <div class="slide reflection-slide">
+    <div class="slide-header">
+      <h2 class="comic-title">ESPACIO DE REFLEXIÓN #1</h2>
+      <span class="badge-pop">¡DEBATE EN CLASE!</span>
+    </div>
+    <div class="speech-bubble" style="background:#FFF; margin-top:30px;">
+      <h3 style="font-family:'Bangers'; font-size:1.6rem; color:var(--comic-red);"> ¿RIGIDEZ VS. DIVERSIDAD?</h3>
+      <p style="font-size:1.2rem; margin-top:10px;">¿De qué manera la estructuración en grados y secuencias de la <strong>Educación Formal</strong> puede favorecer la equidad, pero al mismo tiempo representar un obstáculo para estudiantes con ritmos y estilos de aprendizaje diversos?</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: LEY 115 - EDUCACIÓN NO FORMAL -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">LEY 115 DE 1994: EDUCACIÓN NO FORMAL</h2>
+      <span class="badge-pop">CAPÍTULO 2 (ART. 36 Y 37)</span>
+    </div>
+    <div class="grid-2">
+      <div class="comic-card">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> ARTÍCULO 36: DEFINICIÓN</h3>
+        <p style="font-size:0.95rem; margin-top:8px;">Es la que se ofrece con el objeto de <strong>complementar, actualizar, suplir conocimientos y formar en aspectos académicos o laborales</strong> sin sujeción al sistema de niveles y grados del Artículo 11.</p>
+      </div>
+      <div class="comic-card comic-card-yellow">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> ARTÍCULO 37: FINALIDAD</h3>
+        <p style="font-size:0.9rem; margin-top:5px;">Promueve el perfeccionamiento personal, afirmación de valores nacionales, capacitación artesanal, artística, recreacional, ocupacional y técnica, protección ambiental y participación comunitaria.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: LEY 115 - EDUCACIÓN INFORMAL -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">LEY 115 DE 1994: EDUCACIÓN INFORMAL</h2>
+      <span class="badge-pop">ARTÍCULOS 43 Y 44</span>
+    </div>
+    <div class="grid-2">
+      <div class="comic-card">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> ARTÍCULO 43: DEFINICIÓN</h3>
+        <p style="font-size:0.95rem; margin-top:8px;">Todo conocimiento <strong>libre y espontáneamente adquirido</strong>, proveniente de personas, entidades, medios masivos de comunicación, medios impresos, tradiciones, costumbres y entornos no estructurados.</p>
+      </div>
+      <div class="comic-card comic-card-blue">
+        <h3 style="font-family:'Bangers'; font-size:1.3rem;"> ARTÍCULO 44: MISIÓN DE LOS MEDIOS</h3>
+        <p style="font-size:0.9rem; margin-top:5px;">El Gobierno fomentará la participación de medios masivos en educación permanente y cultura (respetando libertad de prensa/expresión), creando estímulos para el mejoramiento educativo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: PREGUNTA DE REFLEXIÓN 2 -->
+  <div class="slide reflection-slide">
+    <div class="slide-header">
+      <h2 class="comic-title">ESPACIO DE REFLEXIÓN #2</h2>
+      <span class="badge-pop">¡IMPACTO DIGITAL!</span>
+    </div>
+    <div class="speech-bubble" style="background:#FFF; margin-top:30px;">
+      <h3 style="font-family:'Bangers'; font-size:1.6rem; color:var(--comic-blue);"> ¿EL PODER DE LO INFORMAL?</h3>
+      <p style="font-size:1.2rem; margin-top:10px;">Con la llegada de las redes sociales e Inteligencia Artificial, ¿consideras que la <strong>Educación Informal</strong> tiene hoy un impacto socioemocional y cognitivo mayor que la escuela formal en los jóvenes?</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: PRINCIPIOS FUNDAMENTALES LEY 115 -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">PRINCIPIOS FUNDAMENTALES DE LA LEY 115</h2>
+      <span class="badge-pop">PILARES LEGALES</span>
+    </div>
+    <div class="comic-card">
+      <ul style="line-height:1.6; font-size:0.95rem; padding-left:15px;">
+        <li><strong>Derecho a la Educación:</strong> Fundamentado en la Constitución Política como garantía universal.</li>
+        <li><strong>Proceso Integral:</strong> Formación permanente en dimensiones personal, cultural y social.</li>
+        <li><strong>Función Social:</strong> Servicio público regulado para responder a necesidades de las personas y la sociedad.</li>
+        <li><strong>Libertades Educativas:</strong> Libres cátedra, enseñanza, aprendizaje e investigación.</li>
+        <li><strong>Inclusión y Diversidad:</strong> Atención a niños, jóvenes, adultos, etnias y personas con limitaciones o capacidades excepcionales.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: ROL DEL PSICÓLOGO EDUCATIVO -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">ROL DEL PSICÓLOGO EDUCATIVO EN LA LEY 115</h2>
+      <span class="badge-pop">¡PRAXIS PROFESSIONAL!</span>
+    </div>
+    <div class="grid-2">
+      <div class="comic-card comic-card-yellow">
+        <h3 style="font-family:'Bangers'; font-size:1.2rem;"> Funciones Clave (Págs. 2, 4, 19, 24):</h3>
+        <ul style="font-size:0.85rem; padding-left:15px; line-height:1.4;">
+          <li><strong>Desarrollo Integral:</strong> Apoyo emocional, social y cognitivo en el aprendizaje.</li>
+          <li><strong>Atención a la Diversidad:</strong> Estrategias personalizadas para NEE y capacidades excepcionales.</li>
+          <li><strong>Orientación y Convivencia:</strong> Resolución de conflictos y clima escolar positivo.</li>
+        </ul>
+      </div>
+      <div class="comic-card comic-card-blue">
+        <h3 style="font-family:'Bangers'; font-size:1.2rem;"> Intervención Comunitaria:</h3>
+        <ul style="font-size:0.85rem; padding-left:15px; line-height:1.4;">
+          <li><strong>Prevención:</strong> Programas contra el acoso escolar (bullying) y violencia.</li>
+          <li><strong>Trabajo Interdisciplinario:</strong> Colaboración activa con docentes, directivos y familias.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 14: PREGUNTA CENTRAL DE REFLEXIÓN -->
+  <div class="slide reflection-slide">
+    <div class="slide-header">
+      <h2 class="comic-title">DISCUSIÓN CENTRAL</h2>
+      <span class="badge-pop">¡DEBATE PRINCIPAL!</span>
+    </div>
+    <div class="speech-bubble" style="background:#FFF; margin-top:20px;">
+      <h3 style="font-family:'Bangers'; font-size:1.6rem;"> ¿CUÁL ES MÁS IMPORTANTE PARA EL DESARROLLO HUMANO?</h3>
+      <p style="font-size:1.15rem; margin-top:10px;">¿Cuál de los tres tipos de educación (Formal, No Formal o Informal) consideras más determinante para el desarrollo de la persona? <strong>¡Argumenta tu respuesta con un ejemplo concreto!</strong></p>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: CUADRO COMPARATIVO -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">CUADRO COMPARATIVO SÍNTESIS</h2>
+      <span class="badge-pop">¡RECAPITULACIÓN!</span>
+    </div>
+    <table class="comic-table">
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th>Educación Formal</th>
+          <th>Educación No Formal</th>
+          <th>Educación Informal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Estructura</strong></td>
+          <td>Estructurada y secuencial</td>
+          <td>Flexible y adaptativa</td>
+          <td>No estructurada</td>
+        </tr>
+        <tr>
+          <td><strong>Certificación</strong></td>
+          <td>Sí, títulos oficiales</td>
+          <td>Certificados no oficiales</td>
+          <td>Sin certificación</td>
+        </tr>
+        <tr>
+          <td><strong>Entorno</strong></td>
+          <td>Instituciones educativas</td>
+          <td>Entornos organizados</td>
+          <td>Vida cotidiana</td>
+        </tr>
+        <tr>
+          <td><strong>Participación</strong></td>
+          <td>Obligatoria (niveles clave)</td>
+          <td>Voluntaria</td>
+          <td>Espontánea</td>
+        </tr>
+        <tr>
+          <td><strong>Ejemplos</strong></td>
+          <td>Escuelas, Universidades</td>
+          <td>Talleres, Cursos cortos</td>
+          <td>Habilidades sociales, Medios</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SLIDE 16: TALLER PRÁCTICO -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">TALLER APLICADO EN EQUIPO</h2>
+      <span class="badge-pop">¡ACTIVIDAD EN CLASE!</span>
+    </div>
+    <div class="comic-card comic-card-yellow">
+      <h3 style="font-family:'Bangers'; font-size:1.5rem;"> DISEÑO DE INFOGRAFÍA EXPLICATIVA</h3>
+      <p style="font-size:1.05rem; margin-top:10px; line-height:1.5;">Diseñe y presente en subgrupos una <strong>Infografía Visual</strong> en la cual se evidencie de manera gráfica la diferenciación entre educación formal, no formal e informal, y amplíe detalladamente los <strong>tres niveles de la educación formal</strong> (Preescolar, Básica y Media) fijados por la Ley 115 de 1994.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 17: REFERENCIAS BIBLIOGRÁFICAS -->
+  <div class="slide">
+    <div class="slide-header">
+      <h2 class="comic-title">REFERENCIAS BIBLIOGRÁFICAS</h2>
+      <span class="badge-pop">FUENTES</span>
+    </div>
+    <div class="comic-card">
+      <ul style="font-size:0.9rem; line-height:1.8; list-style-type:none;">
+        <li> León, Aníbal. (2007). <em>Qué es la educación</em>. Educere, 11(39), 595-604.</li>
+        <li> Carrillo Salcedo, J.A. (2001). <em>Soberanía de los Estados y Derechos Humanos en Derecho internacional contemporáneo</em>. Madrid: Tecnos.</li>
+        <li> Congreso de la República de Colombia. (1994). <em>Ley 115 de Febrero 8 de 1994: Ley General de Educación</em>. Ministerio de Educación Nacional.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONTROLES DE NAVEGACIÓN -->
+  <div class="controls">
+    <button class="btn-comic" id="prevBtn" onclick="changeSlide(-1)">◄ ANTERIOR</button>
+    <span class="page-indicator" id="pageIndicator">Diapositiva 1 de 17</span>
+    <button class="btn-comic" id="nextBtn" onclick="changeSlide(1)">SIGUIENTE ►</button>
+  </div>
+
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const pageIndicator = document.getElementById('pageIndicator');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) slide.classList.add('active');
+    });
+    pageIndicator.textContent = `Diapositiva ${index + 1} de ${slides.length}`;
+  }
+
+  function changeSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = 0;
+    if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+    showSlide(currentSlide);
+  }
+</script>
+
+</body>
+</html>
